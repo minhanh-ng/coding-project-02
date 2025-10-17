@@ -6,5 +6,8 @@ function fetchProductsThen() {
         data.forEach((p) => console.log(p.fields.name));
         return data;
     })
+    .catch((err) => {
+        console.error("Fetchfailed:", err);
+    })
    
 }
