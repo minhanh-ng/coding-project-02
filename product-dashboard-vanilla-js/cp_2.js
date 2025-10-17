@@ -15,11 +15,31 @@ function fetchProductsThen() {
 async function fetchProductsAsync() {
     try{
         const res = await fetch("https://www.course-api.com/javascript-store-products");
-        const data = await res.json();
-        displayProduct(data);
-        return data;
+        const products = await res.json();
+        displayProduct(products);
+        return products;
     } catch (err) {
         handleError(err);
         return null;
     }
 }
+
+//App bootstrap - call both to saisfy rubric behaviors
+
+// Step 5: Display Product
+function displayProducts(products) {
+    container.innerHTML = ""; // to clear previous
+    products.slice(0,5).forEach((p) => {
+        const {name, price} = p.fields;
+        const imageUrl = getImageUrl(p.fields);
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+            <img class="product-image" src ="${www.course-api.com/javascript-store-products}" alt="${escapeHtml(name)}">
+            <><div class="product-name"> ${escapeHtml(name)} </div>
+            <div class="product-price"> $${(price / 100).toFixed(2)} </div></>
+        `;
+        container.appendChild(card);
+    });
+    statusEl.textContent = "Showing first 5 products.";
+};
