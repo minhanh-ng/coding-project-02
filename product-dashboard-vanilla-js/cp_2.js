@@ -16,7 +16,7 @@ async function fetchProductsAsync() {
     try{
         const res = await fetch("https://www.course-api.com/javascript-store-products");
         const products = await res.json();
-        displayProduct(products);
+        displayProducts(products);
         return products;
     } catch (err) {
         handleError(err);
@@ -27,18 +27,26 @@ async function fetchProductsAsync() {
 //App bootstrap - call both to saisfy rubric behaviors
 
 // Step 5: Display Product
-const container = document.getElementById("product-container")
+const container = document.getElementById("product-container");
+const statusEl = document.getElementById("status");
+
+function getImageUrl(fields) {
+  return fields.image[0].url; 
+};
+
 function displayProducts(products) {
     container.innerHTML = ""; // to clear previous
+
     products.slice(0,5).forEach((p) => {
         const {name, price} = p.fields;
         const imageUrl = getImageUrl(p.fields);
+
         const card = document.createElement("div");
         card.className = "product-card";
         card.innerHTML = `
-            <img class="product-image" src ="${www.course-api.com/javascript-store-products}" alt="${escapeHtml(name)}">
-            <><div class="product-name"> ${escapeHtml(name)} </div>
-            <div class="product-price"> $${(price / 100).toFixed(2)} </div></>
+            <img class="product-image" src ="${imageUrl}" alt="${name}">
+            <div class="product-name"> ${name} </div>
+            <div class="product-price">$${(price / 100).toFixed(2)} </div>
         `;
         container.appendChild(card);
     });
@@ -49,3 +57,7 @@ function displayProducts(products) {
 function handleError(error) {
     console.log(`An error occurred: ${error}`)
 }
+
+// Step 7: call two functions
+fetchProductsThen();
+fetchProductsAsync();
