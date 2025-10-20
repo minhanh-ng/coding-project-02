@@ -44,3 +44,8 @@ function displayProducts(products) {
     });
     statusEl.textContent = "Showing first 5 products.";
 };
+
+// Step 6: Add a reusable handleError(error) function
+function handleError(error) {
+    console.log(`An error occurred: ${error}`)
+}
