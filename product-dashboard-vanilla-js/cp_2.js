@@ -27,6 +27,7 @@ async function fetchProductsAsync() {
 //App bootstrap - call both to saisfy rubric behaviors
 
 // Step 5: Display Product
+const container = document.getElementById("product-container")
 function displayProducts(products) {
     container.innerHTML = ""; // to clear previous
     products.slice(0,5).forEach((p) => {
